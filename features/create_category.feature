@@ -27,20 +27,35 @@ Feature: Create Categories
     # And I fill in "Permalink" with "Permalink Address"
     And I press "Save"
     Then I should be on the new_and_edit category page
-    Then I should see "SXSW"
-    Then I should see "Conference"
-    Then I should see "Description Text"
-    Then I should see "Permalink Address"
+    # check flash message
+    And I should see "Category was successfully saved."
+    And I should see "Categories"
+    And I should see "Your category slug"
+    And I should see "SXSW"
+    And I should see "Conference"
+    And I should see "Description Text"
+    And I should see "Permalink Address"
 
-  # Sad path
-  # Scenario: Abandon creation of a category
-  #   Given I am on the admin home page
-  #   When I follow "Categories"
-  #   Then I should be on the new_and_edit category page
+  # Sad path (copy happy above and negate, key changes commented)
+  Scenario: Abandon creation of a category
+    Given I am on the admin home page
+    When I follow "Categories"
+    Then I should be on the new_and_edit category page
     
-  #   When I fill in "Name" with "SXSW"
-  #   And I fill in "Keywords" with "Conference"
-  #   And I fill in "Description" with "Lorum Ipsum"
-  #   And I press "Save"
-  #   Then I should be on the new_and_edit category page
-  #   Then I should see "SXSW"
+    When I fill in "Name" with "SXSW"
+    And I fill in "Keywords" with "Conference"
+    And I fill in "Description" with "Description Text"
+    When I fill in "category_permalink" with "Permalink Address"
+    # Change to follow "Cancel" link rather than submit "Save" form
+    And I follow "Cancel"
+    Then I should be on the new_and_edit category page
+    # no flash message
+    And I should not see "Category was successfully saved."
+    # same messages 
+    And I should see "Categories"
+    And I should see "Your category slug"
+    # no new category created
+    And I should not see "SXSW"
+    And I should not see "Conference"
+    And I should not see "Description Text"
+    And I should not see "Permalink Address"
