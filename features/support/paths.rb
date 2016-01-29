@@ -17,6 +17,9 @@ module NavigationHelpers
       '/'
     when /^the new article page$/
       '/admin/content/new'
+    # added for bug fix 
+    when /^the admin home page$/
+      '/admin'
     when /^the new_and_edit category page$/
       '/admin/categories/new'
 
