@@ -5,18 +5,14 @@ Feature: Merge articles
     
 Background:
     Given the blog is set up
-    And the following users exist:
-        | profile_id | login | password  | email             | state  |
-        | 2          | two   | 1234      | two@two.com       | active |
-        | 3          | three | 1234      | three@three.com   | active |
     And the following articles exist:
-        | id | title    | author    | user_id | body | allow_comments | published | published_at        | state     | type 
-        | 4  | Article1 | two       | 2       | body1| true           | true      | 2016-01-01 10:00:00 | published | article
-        | 5  | Article2 | three     | 3       | body1| true           | true      | 2016-01-01 10:00:00 | published | article
+        | id | title    | author    | user_id | body | allow_comments | published | published_at        | state     | type      |
+        | 3  | Article1 | two       | 2       | body1| true           | true      | 2016-01-01 10:00:00 | published | article   |
+        | 4  | Article2 | three     | 3       | body1| true           | true      | 2016-01-01 10:00:00 | published | article   |
     And the following comments exist:
-        |id | type    | author  | body      | article_id| user_id   | created_at
-        | 1 | Comment | one     | comment1  | 4         | 2         | 2016-01-01 10:00:00 
-        | 2 | Comment | two     | comment2  | 5         | 3         | 2016-01-01 10:00:00 
+        |id | type    | author  | body      | article_id| user_id   | created_at            |
+        | 1 | Comment | one     | comment1  | 3         | 1         | 2016-01-01 10:00:00   |
+        | 2 | Comment | two     | comment2  | 4         | 2         | 2016-01-01 10:00:00   |
     
 # Happy Path
 Scenario: Admin can successfully merge articles
